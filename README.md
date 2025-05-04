@@ -1,4 +1,4 @@
-# ruCoir Датасет
+# ruCoIR Датасет
 
 ruCoir датасет переведен с использованием phi4 на русский. Передены некоторые задания: apps, codefeedback-st, stackoverflow-qa, cosqa, codesearchnet.
 
