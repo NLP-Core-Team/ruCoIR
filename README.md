@@ -34,4 +34,5 @@ python API_retrival_run_eval.py \
   python read_scores_all.py ./results. Результат будет сохранен в файл `results.csv`.
 
 ## Результаты замеров открытых моделей
-<img width="1244" alt="image" src="https://github.com/user-attachments/assets/ee5d3c0a-1ef4-4c1e-b32c-6734b81bf287" />
+![image](https://github.com/user-attachments/assets/9b8cc299-d8f7-4779-9cdf-23e8463d7bbe)
+
