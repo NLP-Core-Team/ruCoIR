@@ -12,13 +12,14 @@ from huggingface_hub import login
 
 
 class YourCustomDEModel:
-    def __init__(self, model_name="intfloat/e5-base-v2", truncate_dim=None, **kwargs):
+    def __init__(self, model_name="intfloat/e5-base-v2", truncate_dim=None, max_seq_length=4096, **kwargs):
         self.model = SentenceTransformer(
             model_name,
             trust_remote_code=True,
             truncate_dim=truncate_dim,
             model_kwargs ={"torch_dtype":torch.float16}
             )
+        self.model.max_seq_length = max_seq_length
 
     def encode_text(self, texts: List[str], batch_size: int = 12, show_progress_bar: bool = True, **kwargs) -> np.ndarray:
         logging.info(f"Encoding {len(texts)} texts...")
@@ -48,13 +49,14 @@ def main():
     parser.add_argument('--batch_size', type=int, default=128, help='Batch size for evaluation.')
     parser.add_argument('--hf_token', type=str, help='Hugging Face token for login.')
     parser.add_argument('--embeddings_size', type=int, default=None, help='Truncate dimension for the model.')
+    parser.add_argument('--max_seq_length', type=int, default=4096, help='Maximum sequence length for the model.')
 
     args = parser.parse_args()
     if args.hf_token:
         login(token=args.hf_token)
 
     # Load the model
-    model = YourCustomDEModel(model_name=args.model_name, truncate_dim=args.embeddings_size)
+    model = YourCustomDEModel(model_name=args.model_name, truncate_dim=args.embeddings_size, max_seq_length=args.max_seq_length)
 
     # Get tasks
     tasks = coir.get_tasks(tasks=args.tasks)
